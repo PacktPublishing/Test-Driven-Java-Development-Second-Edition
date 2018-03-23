@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>HOME - Fibonacci</title>
+</head>
+<body>
+    <div th:if="${isWebEnabled}">
+        <p>List of links:</p>
+        <ul th:each="number : ${arrayOfInts}">
+            <li><a th:href="@{/web/fibonacci(number=${number})}" th:text="'Click here to compute ' + ${number} + 'th fibonacci number'"></a></li>
+        </ul>
+    </div>
+</body>
+</html>
+

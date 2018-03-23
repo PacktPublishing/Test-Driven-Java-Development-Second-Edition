@@ -1,0 +1,37 @@
+group 'com.packtpublishing.tddjava.ch09'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.17'
+    compile 'org.springframework:spring-web:4.1.4.RELEASE'
+    compile 'org.glassfish.jersey.ext:jersey-spring3:2.17'
+    compile 'org.glassfish.jersey.media:jersey-media-json:2.0-m05-1'
+    compile 'commons-logging:commons-logging:1.1'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.jayway.restassured:rest-assured:2.4.1'
+    testCompile 'org.glassfish.jersey.containers:jersey-container-grizzly2-servlet:2.17'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+}
+
+apply plugin: 'war'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:2.0.0'
+    }
+}
+
+apply plugin: 'org.akhikhl.gretty'

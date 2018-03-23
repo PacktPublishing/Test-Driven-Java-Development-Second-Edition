@@ -1,0 +1,4 @@
+features:
+    fibonacci:
+        restEnabled: true
+        webEnabled: false

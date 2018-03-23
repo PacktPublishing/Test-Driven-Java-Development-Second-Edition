@@ -1,0 +1,54 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+
+    testCompile 'org.seleniumhq.selenium:selenium-java:2.45.0'
+    testCompile 'com.codeborne:selenide:2.17'
+
+    testCompile 'info.cukes:cucumber-java:1.2.2'
+    testCompile 'info.cukes:cucumber-junit:1.2.2'
+
+    testCompile 'org.jbehave:jbehave-core:3.9.5'
+    testCompile 'org.jbehave.site:jbehave-site-resources:3.2@zip'
+}
+
+def jarPath(String jarName) {
+    configurations.testCompile.filter{it.name.startsWith(jarName)}.asPath
+}
+
+task testJBehave(type: Test) {
+    include '**/JBehaveTest*'
+}
+
+task testCucumber(type: Test) {
+    include '**/CucumberTest*'
+}
+
+test {
+    doFirst {
+        copy {
+            from(zipTree(jarPath("jbehave-core"))) {
+                include "style/*"
+            }
+            into("build/reports/jbehave/view")
+
+        }
+        copy {
+            from(zipTree(jarPath("jbehave-site-resources"))) {
+                include "js/**/*"
+                include "style/**/*"
+                include "images/*"
+            }
+            into("build/reports/jbehave/view")
+        }
+    }
+}

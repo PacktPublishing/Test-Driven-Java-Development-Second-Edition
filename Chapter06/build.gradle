@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'jacoco'
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.jongo:jongo:1.1'
+    compile 'org.mongodb:mongo-java-driver:2.+'
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.mockito:mockito-all:1.+'
+}
+
+//TODO: Add to book
+test {
+    include '**/*Spec.class'
+}
+
+//TODO: Add to book
+task testInteg(type: Test) {
+    include '**/*Integ.class'
+}
